@@ -49,7 +49,7 @@ class Order:
 
 
 cherry=Goods("Cherry",100, "fruit")
-potatoes=Goods("Potatoes",-20,'vegetables')
+potatoes=Goods("Potatoes",20,'vegetables')
 limon=Goods("Limon",80,"fruit")
 
 

@@ -7,11 +7,25 @@
 
 
 
+# 1. Модифікуйте Перше домашнє завдання так, щоб при спробі встановити
+# від'ємну або нульову вартість товару викликалася виняткова ситуація (тип виняткової ситуації треба самостійно реалізувати).
 
+
+
+
+class Incorrect_price (Exception):
+    def __init__(self, message):
+        self.message=message
+    def __str__(self):
+        return f"{self.message}"
 
 
 class Goods:
-    def __init__(self,title, price, group_of_goods):
+    def __init__(self, title, price, group_of_goods):
+        if price <= 0:
+            raise Incorrect_price("Sometimes was wrong")
+
+
         self.title = title
         self.price = price
         self.group_of_goods=group_of_goods
@@ -47,21 +61,25 @@ class Order:
     def __str__(self):
         return f'{self.name} ({customerB})' +'\n' +'\n' +'\n'.join(map(str, self.list_of_goods)) + '\n' + f"{'_' * 44}" '\n'+ 'Total cost:  ' + f'{sum(map(int, self.price_of_goods))} UAH'
 
-
-cherry=Goods("Cherry",100, "fruit")
-potatoes=Goods("Potatoes",20,'vegetables')
-limon=Goods("Limon",80,"fruit")
-
-
-customerA=Сustomer("Alexander","Panchuk", "+380930252500")
-customerB=Сustomer("Maksym","Evych","+380675544333")
-
-order_1 =Order("Consumer Order 09_12_2022")
-order_1.add(cherry)
-order_1.add(limon)
-order_1.add(potatoes)
+try:
+    cherry=Goods("Cherry",100, "fruit")
+    potatoes=Goods("Potatoes",0,'vegetables')
+    limon=Goods("Limon",80,"fruit")
 
 
+    customerA=Сustomer("Alexander","Panchuk", "+380930252500")
+    customerB=Сustomer("Maksym","Evych","+380675544333")
+
+    order_1 =Order("Consumer Order 09_12_2022")
+    order_1.add(cherry)
+    order_1.add(limon)
+    order_1.add(potatoes)
+    print(order_1)
 
 
-print(order_1)
+
+except Incorrect_price:
+    print("The price of the product is incorrect")
+
+
+#

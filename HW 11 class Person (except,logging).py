@@ -47,7 +47,29 @@ class Group:
         self.title = title
         self.__students = []
         self.max_student = max_students
+        self.index = 0
 
+    # def __len__(self):
+    #     return self.max_student
+    #
+    # def __getitem__(self, index):
+    #     if isinstance(index, slice):
+    #         if index.start < 0 or index.stop > self.max_student:
+    #             raise IndexError
+    #         else:
+    #
+    #             start = 0 if index.start == None else index.start
+    #             stop = self.max_student - 1 if index.stop == None else index.stop
+    #             step = 1 if index.step == None else index.step
+    #             for i in range(start, stop, step):
+    #                 self.__students.append(i)
+    #             return self.__students
+    #     if isinstance(index, int):
+    #         if index < self.max_student:
+    #             return index
+    #         else:
+    #             raise IndexError
+    #     raise TypeError()
 
     def add(self, student):
 
@@ -56,6 +78,16 @@ class Group:
             logging.info(student)
         else:
             raise Too_many_students("Too_many_students")
+
+    def __iter__(self):
+        self.index=0
+        return self
+
+    def __next__(self):
+        if self.index<len(self.__students):
+            self.index+=1
+            return self.__students[self.index-1]
+        raise  StopIteration
 
 
 
@@ -90,15 +122,17 @@ try:
     a.add(Student('Oleg', 'Skrypka', 23, "Anatoliyovych"))
     a.add(Student('Seghiy', 'Gorbatenko', 20, "Romanovych"))
     a.add(Student('Bogdan', 'Byt', 24, "Bogdanovych"))
-    a.add(Student('Oleksandr', 'Lyah', 25, "Dmytrovych"))
-    a.add(Student('Maksym', 'Lyah', 26, "Anatoliyovych"))
-    a.add(Student('Taras', 'Lyah', 21, "Kostyantunovych"))
+
 
 except Too_many_students:
     print("Too_many_students")
 
-print()
-print(a)
-res = a.search(21)
-for item in res:
-    print(item.name, item.middle_name,  item.age)
+# print()
+# print(a)
+# res = a.search(21)
+# for item in res:
+#     print(item.name, item.middle_name,  item.age)
+
+for student in a:
+    print(student.name, student.surname)
+

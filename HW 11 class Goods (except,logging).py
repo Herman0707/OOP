@@ -6,10 +6,10 @@
 # Визначте метод str() для коректного виведення інформації про це замовлення.
 
 
-
-# 1. Модифікуйте Перше домашнє завдання так, щоб при спробі встановити
+# 4. Модифікуйте Перше домашнє завдання так, щоб при спробі встановити
 # від'ємну або нульову вартість товару викликалася виняткова ситуація (тип виняткової ситуації треба самостійно реалізувати).
 
+# 5.Модифікуєте клас Замовлення (завдання Лекції 1), додавши реалізацію протоколу послідовностей та ітераційного протоколу.
 
 
 
@@ -58,8 +58,44 @@ class Order:
             self.list_of_goods.append(good)
             self.price_of_goods.append(good.price)
 
+    def __iter__(self):
+        self.index = 0
+        return self
+
+    def __next__(self):
+        if self.index < len(self.price_of_goods):
+            self.index += 1
+            return self.price_of_goods[self.index - 1]
+        raise StopIteration
+
     def __str__(self):
         return f'{self.name} ({customerB})' +'\n' +'\n' +'\n'.join(map(str, self.list_of_goods)) + '\n' + f"{'_' * 44}" '\n'+ 'Total cost:  ' + f'{sum(map(int, self.price_of_goods))} UAH'
+
+class Sequence_protocol:
+    def __init__(self, number):
+            self.number = number
+    def __len__(self):
+        return self.number
+    def __getitem__(self, index):
+        if isinstance(index, slice):
+            if index.start < 0 or index.stop > self.number:
+                raise IndexError
+            else:
+                result = []
+                start = 0 if index.start == None else index.start
+                stop = self.number - 1 if index.stop == None else index.stop
+                step = 1 if index.step == None else index.step
+                for i in range(start, stop, step):
+                    result.append(i)
+                return result
+        if isinstance(index, int):
+            if index < self.number:
+                return index
+            else:
+                raise IndexError
+        raise TypeError()
+
+
 
 try:
     cherry=Goods("Cherry",100, "fruit")
@@ -81,5 +117,15 @@ try:
 except Incorrect_price:
     print("The price of the product is incorrect")
 
+x=Sequence_protocol(6)
+for i in x:
+    print(i,end=" ")
+
+print()
+
+Total_cost=0
+for price_of_goods in order_1:
+    Total_cost+=price_of_goods
+print(f"Total_cost: {Total_cost} UAH")
 
 #

@@ -1,17 +1,17 @@
 # Напишіть_функцію-генератор, яка повертатиме прості числа.
 #  Верхня межа діапазону повинна бути задана параметром цієї функції.
 def prime_numbers(stop):
-    seq_prime_num = []
     for item in range(2, stop + 1):
-        for num in seq_prime_num:
+        for num in range (2,item):
             if not item % num:
                 break
         else:
-            seq_prime_num.append(item)
-    yield seq_prime_num
+            yield item
 
-seq=prime_numbers(50)
-print(next(seq))
+
+seq = prime_numbers(50)
+for i in seq:
+    print(i)
 print('_'*56)
 
  # Реалізуйте_генераторну функцію, яка повертатиме по одному члену геометричної прогресії із зазначеним множником.

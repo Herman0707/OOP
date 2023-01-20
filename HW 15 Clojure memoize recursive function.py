@@ -15,14 +15,43 @@ def generator (start, stop, func):
 
 print(*list(generator(2, 5, unique_func)))
 
-
+print(16*"_")
 
 
 # 2. Використовуючи замикання, реалізуйте такий прийом програмування як Мемоізація.
 # Використовуйте отриманий механізм для прискорення функції рекурсивного обчислення n - го члена ряду Фібоначчі.
 # Порівняйте швидкість виконання із просто рекурсивним підходом.
 #
-#
+
+def mem (func):
+    a = dict()
+    def inside (*args):
+        if args in a:
+            return a[args]
+        a[args]=func(*args)
+        return a[args]
+    return inside
+
+# @mem
+def fib(n):
+    if n in (1,2):
+        return 1
+    return  fib(n-1)+fib(n-2)
+
+
+fib=mem(fib)
+
+import time
+
+mem_time = time.process_time()
+print(fib(40))
+print(f"{time.process_time()-mem_time} sec")    # 102334155   using memoization
+                                                # 0.0  sec
+
+                                                # 102334155    without using Memoization
+                                                # 18.078125 sec
+
+
 # 3. Напишіть функцію, яка застосує до списку чисел довільну функцію користувача і поверне суми елементів отриманого
 # списку.
 

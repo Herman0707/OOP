@@ -8,10 +8,10 @@
 def unique_func(num):
     return num**2
 
-def generator (start, stop, func):
+def generator (start, stop, unique_func):
     for i in range(stop):
         yield start
-        start = func(start)
+        start = unique_func(start)
 
 print(*list(generator(2, 5, unique_func)))
 

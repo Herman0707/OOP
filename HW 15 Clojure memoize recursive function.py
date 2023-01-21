@@ -59,7 +59,6 @@ def sum_numbers():
     numbers=[]
     def inner (number):
         numbers.append(number)
-        print(numbers)
         return sum(numbers)
     return inner
 

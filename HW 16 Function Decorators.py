@@ -7,17 +7,17 @@ def quantity_function(func):
     def inner(*args, **kwargs):
         nonlocal count
         count += 1
-        res = f'Result: {func(*args, **kwargs)}, count: {count}'
+        res = f'{func(*args, **kwargs)}, count: {count}'
         return res
     return inner
 
 @quantity_function
-def func(arg):
+def funcion(arg):
     return arg
 
-print(func("hello"))
-print(func("hello"))
-print(func("hello"))
+print(funcion("hello"))
+print(funcion("hello"))
+print(funcion("hello"))
 
 # 2) Створіть декоратор, який зареєструє декоровану функцію в
 # списку функцій для обробки послідовності.

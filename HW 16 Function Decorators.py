@@ -20,6 +20,26 @@ print(my_funcion("hello"))
 
 # 2) Створіть декоратор, який зареєструє декоровану функцію в
 # списку функцій для обробки послідовності.
+
+my_list = []
+
+def add(func):
+    my_list.append(func)
+    return func
+
+@add
+def pow(item):
+    return item**2
+@add
+def floor_div(item):
+    return  item // 2
+@add
+def modul(item):
+    return item % 2
+
+print(*[func(100) for func in my_list])
+
+
 #
 # 3) Припустимо, у класі визначено метод __str__, який повертає
 # рядок виходячи з класу. Створіть такий декоратор для цього методу,

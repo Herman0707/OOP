@@ -12,11 +12,11 @@ def quantity_function(func):
     return inner
 
 @quantity_function
-def funcion(arg):
+def my_funcion(arg):
     return arg
-print(funcion("hello"))
-print(funcion("hello"))
-print(funcion("hello"))
+print(my_funcion("hello"))
+print(my_funcion("hello"))
+print(my_funcion("hello"))
 
 # 2) Створіть декоратор, який зареєструє декоровану функцію в
 # списку функцій для обробки послідовності.

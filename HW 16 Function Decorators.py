@@ -3,7 +3,7 @@
 # викликана функція, що декорується.
 
 def quantity_function(func):
-    count = 0
+    count = False
     def inner(*args, **kwargs):
         nonlocal count
         count += 1
@@ -14,7 +14,6 @@ def quantity_function(func):
 @quantity_function
 def funcion(arg):
     return arg
-
 print(funcion("hello"))
 print(funcion("hello"))
 print(funcion("hello"))

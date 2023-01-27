@@ -73,3 +73,35 @@ print(x,y)
 # тієї чи іншої функції. Параметрами повинні виступати те, скільки разів потрібно
 # запустити функцію, що декорується, і в який файл зберегти результати
 # хронометражу. Мета - провести хронометраж функції, що декорується.
+
+def timekeeping(num=1, fname="myfile.txt"):
+    def dec(func):
+        def inner(*args):
+            i = 0
+            start = time.time()
+            while i < num:
+                res = func(*args)
+                i += 1
+            stop = time.time()
+            file = open(fname, "w")
+            file.write(f" Lead time = {stop - start} sec")
+            file.close()
+            return res
+        return inner
+    return dec
+
+import time
+@timekeeping(2)
+def palindrome():
+    list,list_2 = [],[]
+    for i in range(100, 1000):
+        for j in range(100, 1000):
+            product=i*j
+            if str(product)[:]==str(product)[::-1] and len(str(product))==6:
+                list.append(int(product))
+                if i * j == max(list):
+                    multiplier_1,multiplier_2=i,j
+                    list_2.append(max(list))
+    return f'Значення паліндрому - {max(list_2)}, множники числа: {multiplier_1} та {multiplier_2}'
+
+print(palindrome())

@@ -7,7 +7,7 @@ def quantity_function(func):
     def inner(*args, **kwargs):
         nonlocal count
         count += 1
-        res = f'{func(*args, **kwargs)}, count: {count}'
+        res = count
         return res
     return inner
 
@@ -102,6 +102,6 @@ def palindrome():
                 if i * j == max(list):
                     multiplier_1,multiplier_2=i,j
                     list_2.append(max(list))
-    return f'Значення паліндрому - {max(list_2)}, множники числа: {multiplier_1} та {multiplier_2}'
+    return  max(list_2)
 
 print(palindrome())

@@ -13,6 +13,15 @@ print(shablon("HooofkmRr rBBBRkfdls dsgg rgRbrlhihRbbr jgrbbrugku "))
 #
 # 2. Напишіть функцію, яка виконує валідацію номера банківської картки (9999-9999-9999-9999).
 #
+import re
+
+def card_validation(card_number):
+    pattern = r'^(\d{4}-\d{4}-\d{4}-\d{4})$'
+    return False if not re.search(pattern, card_number) else True
+
+print(card_validation("1122-3344-5566-7788"))
+print(card_validation("00000-3344-5566-7788"))
+
 # 3. Напишіть функцію, яка приймає рядкові дані та виконує перевірку на їхню відповідність мейлу.
 # Вимоги:
 # -Цифри (0-9).

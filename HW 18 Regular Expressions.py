@@ -28,7 +28,16 @@ print(card_validation("00000-3344-5566-7788"))
 # -лише латинські літери у великому (A-Z) та малому (a-z) регістрах.
 # -у тілі мейла допустимі лише символи "_" і "-". Але вони не можуть бути першим символом мейлу.
 # -Символ "-" не може повторюватися.
-#
-#
-#
+
+import re
+
+def mail_validation(mail):
+    pattern = r'^[0-9A-Za-z](-?[0-9A-Za-z_])+@[0-9A-Za-z](-?[0-9A-Za-z._])+$'
+    return False if not re.search(pattern, mail) else True
+
+print(mail_validation('hysar@gmail.com'))
+print(mail_validation('hysa@r@gmail.com'))
+
+
 # 4. Напишіть функцію, яка перевіряє правильність логіну. Правильний логін – рядок від 2 до 10 символів, що містить лише літери та цифри.
+

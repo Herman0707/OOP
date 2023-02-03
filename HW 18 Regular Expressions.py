@@ -41,3 +41,11 @@ print(mail_validation('hysa@r@gmail.com'))
 
 # 4. Напишіть функцію, яка перевіряє правильність логіну. Правильний логін – рядок від 2 до 10 символів, що містить лише літери та цифри.
 
+import re
+
+def login_validation(login):
+    pattern = r'^[a-zA-Z0-9]{2,10}$'
+    return False if not re.search(pattern, login) else True
+
+print(login_validation("112aqwe99k"))
+print(login_validation("112%aqwe99k"))
